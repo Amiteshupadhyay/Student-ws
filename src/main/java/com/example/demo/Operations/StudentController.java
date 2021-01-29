@@ -3,6 +3,7 @@ package com.example.demo.Operations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,20 +17,14 @@ public class StudentController {
 	 @Autowired
 	 StudentService studentService;
 
-	@GetMapping("/healthCheck")
-	public String status() {
-		return "Status: "+HttpStatus.OK;
-	}
-
 	@PostMapping(path = "/createstudent",consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public String createStudent(@RequestBody Student student){
-		return studentService.createStudent(student);
+	public ResponseEntity<String> getEmployees createStudent(@RequestBody Student student){
+		return new ResponseEntity<>(studentService.createStudent(student),HttpStatus.OK);
 	}
 
 	@PostMapping(path = "/studentage",consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public String getAge(Student student){
-		return studentService.getAge(student);
-		
+	public ResponseEntity<String> getAge(Student student){
+		return new ResponseEntity<>(studentService.getAge(student),HttpStatus.OK);
 	}
 
 }
