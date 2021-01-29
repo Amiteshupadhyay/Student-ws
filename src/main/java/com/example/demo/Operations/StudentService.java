@@ -16,21 +16,13 @@ public class StudentService {
 	static Map<String, Student> h = new HashMap<>();
 
 	String createStudent(Student s) {
-		if (validator.isValid(s)) {
-			if (!h.containsKey(s.getRollno()))
-				h.put(s.getRollno(), s);
-		} else {
-			return null;
-		}
+		if (!h.containsKey(s.getRollno()))
+			h.put(s.getRollno(), s);
 		return "Created\n" + s.toString();
-		//return new ResponseEntity<>( "Created\n" + s.toString(),HttpStatus.OK);
 
 	}
 
 	String getAge(Student s) {
-		if (!validator.isValid(s)) {
-			return "";
-		}
 
 		if (h.containsKey(s.getRollno())) {
 			Student memoryStd = h.get(s.getRollno());
