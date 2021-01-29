@@ -1,4 +1,4 @@
-package com.example.demo.Operations;
+package com.example.demo.operations;
 
 import java.time.LocalDate;
 
@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class Validator {
 
-	boolean isValid(Student s) {
+	public boolean isValid(Student s) {
 		for (int i = 0; i < s.getName().length(); i++) {
 			if (!Character.isAlphabetic(s.getName().charAt(i))) {
 				return false;
@@ -21,9 +21,9 @@ public class Validator {
 		}
 
 		// taking age 120 as allowed Value
-//		if (LocalDate.now().getYear() - s.getDOB().getYear() > 120) {
-//			return false;
-//		}
+		if (LocalDate.now().getYear() - s.getDOB().getYear() > 120) {
+			return false;
+		}
 		return true;
 	}
 

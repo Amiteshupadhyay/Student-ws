@@ -1,4 +1,4 @@
-package com.example.demo.Operations;
+package com.example.demo.operations;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -9,9 +9,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.definations.IStudentController;
+
 @RestController
 @RequestMapping("/students")
-public class StudentController {
+public class StudentController implements IStudentController {
 
 	@Autowired
 	StudentService studentService;
@@ -19,7 +21,6 @@ public class StudentController {
 	@Autowired
 	Validator validator;
 
-	@PostMapping(path = "/createstudent", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<String> createStudent(@RequestBody Student student) {
 		if (validator.isValid(student))
 			return new ResponseEntity<>(studentService.createStudent(student), HttpStatus.OK);
@@ -28,7 +29,6 @@ public class StudentController {
 		}
 	}
 
-	@PostMapping(path = "/studentage", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<String> getAge(Student student) {
 		if (validator.isValid(student))
 			return new ResponseEntity<>(studentService.getAge(student), HttpStatus.OK);

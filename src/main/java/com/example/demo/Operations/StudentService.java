@@ -1,4 +1,4 @@
-package com.example.demo.Operations;
+package com.example.demo.operations;
 
 import java.time.LocalDate;
 import java.time.Period;
@@ -15,15 +15,17 @@ public class StudentService {
 
 	static Map<String, Student> h = new HashMap<>();
 
-	String createStudent(Student s) {
-		if (!h.containsKey(s.getRollno()))
+	public String createStudent(Student s) {
+		if (!h.containsKey(s.getRollno())) {
 			h.put(s.getRollno(), s);
 		return "Created\n" + s.toString();
+		}else {
+			return "Student already exists";
+		}
 
 	}
 
-	String getAge(Student s) {
-
+	public String getAge(Student s) {
 		if (h.containsKey(s.getRollno())) {
 			Student memoryStd = h.get(s.getRollno());
 			Period period = Period.between(LocalDate.now(), memoryStd.getDOB());
